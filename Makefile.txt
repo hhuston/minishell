@@ -1,0 +1,11 @@
+CC=gcc
+CFLAGS=-c -g -Wall -Werror -pedantic-errors
+
+all: minishell.o
+	$(CC) minishell.o -o minishell
+
+minishell.o:
+	$(CC) $(CFLAGS) minishell.c
+
+clean:
+	rm *.o minishell

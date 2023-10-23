@@ -1,8 +1,3 @@
-/*
- * Harrison Huston
- * I pledge my honor that I have abided by the Stevens Honor System. 
- */
-
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -34,6 +29,7 @@ int main() {
 		interrupted = 0;
 		errno = 0;
 
+		// Attempt to get the current working directory
 		if (getcwd(cwd, 256) == NULL) {
 			fprintf(stderr, "Error: Cannot get current working directory. %s.\n", strerror(errno));
 			continue;
@@ -43,7 +39,10 @@ int main() {
 		
 		// Read User's Input
 		size_t size = 2048;
-		char* input = (char*)malloc(size);
+		if ((input = (int*)malloc(size)) == NULL) {
+			fprintf(stderr, "Error: malloc() failed. %s.\n", strerror(errno));
+			continue;
+		}
 		fgets(input, size, stdin);
 		
 		if (size  == -1) {
